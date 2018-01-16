@@ -1,0 +1,23 @@
+h1 {
+	color: #FF0000;
+	/*border-color: purple;
+	border-width: 5px;
+	border-style: solid;*/
+
+	border: 2px purple dashed;
+}
+
+li{
+	color: rgb(0, 200, 0);
+}
+
+h3 {
+	background: rgb(255, 100, 80);
+}
+
+body {
+	background: pink;
+	/*background: url(http://ledprintpro.com/wp-content/uploads/2017/01/wood-grain-pencil-drawing-wood-grain-how-to-draw-and-to-draw-on-pinterest.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;*/
+}

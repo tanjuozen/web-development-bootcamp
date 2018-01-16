@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>First forms example</title>
+</head>
+<body>
+
+<h1>Login</h1>
+
+<!-- action - where the form data to (default location is the current location -->
+<!-- method - what HTTP method(get(default)/post) -->
+
+<!-- <form>
+<label>
+		Username:
+		<input name="username" type="text" placeholder="username">
+</label>
+<label>
+		Password:
+		<input name="password" type="password" placeholder="password">
+</label>
+	<input type="submit">
+</form> -->
+
+<form action="http://wikipedia.org" method="get">
+	<label for="username">Username:</label>
+	<input type="text" id="username" required placeholder="Username">
+	<label for="password">Password:</label>
+	<input type="password" id="password" required placeholder="Password">
+	<label for="email">Email:</label>
+	<input type="email" id="email" required>
+	<input type="submit">
+	<label for="colors">Pick a color</label>
+	<input type="color" id="colors">
+</form>
+
+</body>
+</html>

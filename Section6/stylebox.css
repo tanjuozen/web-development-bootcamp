@@ -1,0 +1,16 @@
+p {
+/*Content - Width and Height*/
+width: 20%;
+/*Border*/
+border: 2px solid blue;
+
+/*Padding*/
+/*padding: 10px;*/
+
+padding-left: 20px;
+/*Margin*/
+/*margin: 100px;*/
+/*margin: 20px 40px 100px 40px;*/
+/*margin: 0 auto 0 auto;*/
+margin: 0 auto;
+}

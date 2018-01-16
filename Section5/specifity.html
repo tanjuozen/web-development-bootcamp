@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Specifity Training</title>
+	<style type="text/css">
+		/*
+		This is how specifity presedence is calculated
+		1. Type Selectors are the most general and least specific
+
+		*/
+		body {
+			color: red;
+		}
+
+		ul {
+			color: blue;
+		}
+
+		li {
+			color: orange;
+		}
+		/*
+		2. Class, Attribute and Pseudo-Class selectors are more specific than type selectors
+		*/
+		.highlight {
+			color: grey;
+		}
+		input[type="text"] {
+			background-color: green;
+		}
+		a:hover {
+
+		}
+		input:checked {
+			
+		}
+		/*
+		3. ID selectors are the most spoecific ones when it comes to cascading
+		*/
+		#special {
+			color: purple;
+		}
+	</style>
+</head>
+<body>
+
+<p>Hello!</p>
+
+<ul>
+	<li id="special" class="highlight">Jordan</li>
+	<li>Pippen</li>
+	<li class="highlight">Kukoc</li>
+</ul>
+</body>
+</html>
