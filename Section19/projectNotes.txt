@@ -1,0 +1,59 @@
+1) Note: In the exercise from the following lecture, be sure to include your paperscript code internally using the script tag. If you try to include this script as an external .js file it will break your app due to Cross Origin Resource Sharing.
+2) Hi Everyone!
+
+Howler.js has updated their syntax in the latest version. Click here to read more about it. See below for an example of the updated syntax (hint: it uses src instead of urls as a key inside of the sound object):
+
+var sound = new Howl({
+  src: ['sound.mp3']
+});
+
+sound.play();
+You can also copy all of the updated syntax for the keyData object from here.
+
+You'll also need to update your Howler file, see here for a CDN link to the latest version.
+
+3) Hello everyone:
+
+This lecture has a resource that you can download with the refactored Patatap Clone code. 
+
+In the refactor, the circles in the array are checked to see if their area is less than 1. If this condition returns true, then the circle is removed from the screen and from the array and i is decremented so the loop doesn't skip a circle now that it's been shifted as a result of the .splice() function. See below:
+
+function onFrame(event){
+  for(var i = 0; i < circles.length; i++){
+    circles[i].scale(0.9);
+    circles[i].fillColor.hue += 1;
+    if(circles[i].area < 1){
+      circles[i].remove(); // remove the circle from the canvas
+      circles.splice(i, 1); // remove the circle from the array
+      i--; // decrement i so that the loop doesn't skip a circle because of .splice()
+      console.log(circles);
+    }
+  }
+}
+I left a console.log() of the circles array so you could see this in action from your chrome developer tools.
+
+
+Meanwhile, if you want to get rid of the Cross Origin errors in the console, you'll need to run a local HTTP server from your project's directory and load the circles.html file from there. The steps are as follows:
+
+*Note: if using Windows, see instructions here
+
+1) navigate to your project folder in the terminal
+
+2) run: 
+
+python -m SimpleHTTPServer
+3) open up your browser and navigate to http://localhost:8000
+
+4) select the circles.html file
+
+In the next couple of lectures we will introduce Cloud9 (C9)
+
+C9 is a cloud based development environment that we'll be using to develop applications for the remainder of the course. 
+
+Cloud9 has changed the way they do signups since they were acquired by Amazon. 
+
+However, as a student of this course, you can still get an invitation for the original Cloud9 by going here.
+
+Additionally, if you would rather setup your local development environment then you can follow these instructions(https://hackhands.com/how-to-get-started-on-the-mean-stack/) for installing npm, node, and mongodb. Instructions are included for PC (Windows/Linux) and Mac.
+
+If you have any questions please post them as a thread in the Q&A.
