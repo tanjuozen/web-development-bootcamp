@@ -1,6 +1,8 @@
 <h1>This is the campgrounds page</h1>
 
 <% campgrounds.forEach((campground)=>{ %>
+    <% include partials/header.ejs%>
+    
     <div>
         <h4>
             <%= campground.name %>
@@ -8,3 +10,6 @@
         <img src="<%= campground.image %>">
     </div>
     <% }); %>
+
+    <% include partials/footer.ejs%>
+    
