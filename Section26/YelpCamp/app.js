@@ -17,6 +17,22 @@ var campgrounds = [
   {
     name: "Granite Hill",
     image: "https://farm4.staticflickr.com/3706/10718494266_56543a9eb7.jpg"
+  },
+  {
+    name: "Granite Hill",
+    image: "https://farm4.staticflickr.com/3706/10718494266_56543a9eb7.jpg"
+  },
+  {
+    name: "Granite Hill",
+    image: "https://farm4.staticflickr.com/3706/10718494266_56543a9eb7.jpg"
+  },
+  {
+    name: "Granite Hill",
+    image: "https://farm4.staticflickr.com/3706/10718494266_56543a9eb7.jpg"
+  },
+  {
+    name: "Granite Hill",
+    image: "https://farm4.staticflickr.com/3706/10718494266_56543a9eb7.jpg"
   }
 ];
 
