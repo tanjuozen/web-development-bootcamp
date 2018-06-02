@@ -44,7 +44,7 @@ app.get("/blogs", (req, res) => {
 });
 
 // NEW ROUTE
-app.get("/blog/new", (req, res) => {
+app.get("/blogs/new", (req, res) => {
     res.render("new");
 });
 
@@ -58,9 +58,19 @@ app.post("/blogs", (req, res) => {
             res.redirect("/blogs");
         }
     });
+});
 
-    // then, redirect to the index 
-
+// SHOW ROUTE
+app.get("/blogs/:id", (req, res) => {
+    Blog.findById(req.params.id, (err, foundBlog) => {
+        if (err) {
+            res.redirect("/");
+        } else {
+            res.render("show", {
+                blog: foundBlog
+            });
+        }
+    });
 });
 
 app.listen(3000, () => {
