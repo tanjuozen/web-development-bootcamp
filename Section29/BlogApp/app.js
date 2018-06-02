@@ -26,7 +26,7 @@ var blogSchema = new mongoose.Schema({
 // MONGOOSE MODEL CONFIG
 var Blog = mongoose.model("Blog", blogSchema);
 
-//RESTFUL ROUTES
+// RESTFUL ROUTES
 app.get("/", (req, res) => {
     res.redirect("/blogs");
 });
@@ -43,6 +43,25 @@ app.get("/blogs", (req, res) => {
     });
 });
 
+// NEW ROUTE
+app.get("/blog/new", (req, res) => {
+    res.render("new");
+});
+
+// CREATE ROUTE
+app.post("/blogs", (req, res) => {
+    // create blog
+    Blog.create(req.body.blog, (err, newBlog) => {
+        if (err) {
+            res.render("new");
+        } else {
+            res.redirect("/blogs");
+        }
+    });
+
+    // then, redirect to the index 
+
+});
 
 app.listen(3000, () => {
     console.log("Started blog app on port 3000");
