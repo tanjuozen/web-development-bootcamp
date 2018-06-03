@@ -59,7 +59,7 @@ app.post("/campgrounds", (req, res) => {
 
 // NEW - Show form to create new campground
 app.get("/campgrounds/new", (req, res) => {
-  res.render("new.ejs");
+  res.render("new");
 });
 
 // SHOW - info about one campground
