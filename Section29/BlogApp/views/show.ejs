@@ -15,11 +15,16 @@
                         </span>
                     </div>
                     <div class="description">
-                        <p> <%= blog.body %> </p>
+                        <p>
+                            <%= blog.body %>
+                        </p>
                     </div>
+                    <button class="ui orange big button">
+                        <a href="/blogs/<%= blog.id %>/edit">Edit the Blog</a>
+                    </button>
                 </div>
             </div>
         </div>
-        
+
     </div>
     <% include partials/footer.ejs%>
