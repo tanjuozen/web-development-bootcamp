@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
 
 seedDB();
 
@@ -74,7 +75,6 @@ app.get("/campgrounds/:id", (req, res) => {
       });
     }
   });
-
 });
 
 // ================================
@@ -112,10 +112,6 @@ app.post("/campgrounds/:id/comments/", (req, res) => {
       });
     }
   });
-  // create new comment
-  // connect bew comment to campgorund
-  // redirect to campground show page
-
 });
 
 app.listen(3000, () => console.log("Server has been started on port 3000"));
