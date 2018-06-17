@@ -37,7 +37,7 @@ app.get("/", (req, res) => {
     res.render("home");
 });
 
-app.get("/secret", (req, res) => {
+app.get("/secret", isLoggedIn, (req, res) => {
     res.render("secret");
 });
 
@@ -74,9 +74,21 @@ app.get("/login", (req, res) => {
 app.post("/login", passport.authenticate("local", {
     successRedirect: "/secret",
     failureRedirect: "/login"
-}), (req, res) => {
+}), (req, res) => {});
 
+
+//Logout Logic
+app.get("/logout", (req, res) => {
+    req.logout();
+    res.redirect("/");
 });
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/login");
+}
 
 app.listen(3000, () => {
     console.log("Server started at port 3000");
