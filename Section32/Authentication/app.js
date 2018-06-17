@@ -24,8 +24,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Coming from UserSchema.plugin(passportLocalMongoose)
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
 
 
 // ===================
@@ -60,6 +62,20 @@ app.post("/register", (req, res) => {
             });
         }
     });
+});
+
+// LOGIN ROUTES
+app.get("/login", (req, res) => {
+    res.render("login");
+});
+
+
+// login logic
+app.post("/login", passport.authenticate("local", {
+    successRedirect: "/secret",
+    failureRedirect: "/login"
+}), (req, res) => {
+
 });
 
 app.listen(3000, () => {
