@@ -10,6 +10,10 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var User = require("./models/user");
 
+// Requiring routes
+var campgroundRoutes = require('./routes/campgrounds');
+var commentRoutes = require('./routes/comments');
+var indexRoutes = require('./routes/index');
 
 mongoose.connect("mongodb://127.0.0.1:27017/yelp_camp");
 app.use(bodyParser.urlencoded({
@@ -18,7 +22,8 @@ app.use(bodyParser.urlencoded({
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
-seedDB();
+// Inject dummy data to DB
+//seedDB();
 
 // PASSPORT CONFIGURATION
 app.use(require('express-session')({
@@ -37,142 +42,8 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get("/", (req, res) => {
-  res.render("landing");
-});
-
-// INDEX - Show all campgrounds
-app.get("/campgrounds", (req, res) => {
-  Campground.find({}, (err, campgrounds) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("campgrounds/index", {
-        campgrounds: campgrounds
-      });
-    }
-  });
-});
-
-// CREATE - add new campground to DB
-app.post("/campgrounds", (req, res) => {
-  // get data from form and add to campgrounds array
-  // redirect back to /campgrounds route
-  var name = req.body.name;
-  var image = req.body.image;
-  var description = req.body.description;
-  var newCampground = {
-    name: name,
-    image: image,
-    description: description
-  };
-  Campground.create(newCampground, (err, newlyCreated) => {
-    if (err) {
-      console.log(err);
-    } else {
-      //redirect as a get request
-      res.redirect("/campgrounds");
-    }
-  });
-});
-
-// NEW - Show form to create new campground
-app.get("/campgrounds/new", (req, res) => {
-  res.render("new");
-});
-
-// SHOW - info about one campground
-app.get("/campgrounds/:id", (req, res) => {
-  // Find the campground with provided id
-  Campground.findById(req.params.id).populate("comments").exec((err, foundCampground) => {
-    if (err) {
-      console.log(err);
-    } else {
-      // Render show template with that campground
-      res.render("campgrounds/show", {
-        campground: foundCampground
-      });
-    }
-  });
-});
-
-// ================================
-// COMMENTS ROUTES 
-// ================================
-
-app.get("/campgrounds/:id/comments/new", isLoggedIn, (req, res) => {
-  Campground.findById(req.params.id, (err, campground) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("comments/new", {
-        campground: campground
-      });
-    }
-  });
-});
-
-app.post("/campgrounds/:id/comments/", isLoggedIn, (req, res) => {
-  //lookup campgrounds using ID
-  Campground.findById(req.params.id, (err, campground) => {
-    if (err) {
-      console.log(err);
-      res.redirect("/campgrounds");
-    } else {
-      console.log(req.body.comment);
-      Comment.create(req.body.comment, (err, comment) => {
-        if (err) {
-          console.log(err);
-        } else {
-          campground.comments.push(comment);
-          campground.save();
-          res.redirect("/campgrounds/" + campground._id);
-        }
-      });
-    }
-  });
-});
-
-// AUTH ROUTES
-app.get("/register", (req, res) => {
-  res.render("register");
-});
-
-app.post("/register", (req, res) => {
-  var newUser = new User({
-    username: req.body.username
-  });
-  User.register(newUser, req.body.password, (err, user) => {
-    if (err) {
-      console.log(err);
-      return res.render("register");
-    }
-    passport.authenticate("local")(req, res, () => {
-      res.redirect("/campgrounds");
-    });
-  });
-});
-
-app.get("/login", (req, res) => {
-  res.render("login");
-});
-
-app.post("/login", passport.authenticate("local", {
-  successRedirect: "/campgrounds",
-  failureRedirect: "/login"
-}), (req, res) => {});
-
-// Logout route
-app.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect("/campgrounds");
-});
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/login");
-}
+app.use("/", indexRoutes);
+app.use("/campgrounds", campgroundRoutes);
+app.use("/campgrounds/:id/comments", commentRoutes);
 
 app.listen(3000, () => console.log("Server has been started on port 3000"));
