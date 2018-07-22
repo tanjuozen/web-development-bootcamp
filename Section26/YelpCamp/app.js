@@ -2,9 +2,8 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require('mongoose');
-var Campground = require('./models/campground');
-var Comment = require('./models/comment');
 var seedDB = require('./seeds');
+var methodOverride = require('method-override');
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
@@ -21,7 +20,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-
+app.use(methodOverride("_method"))
 // Inject dummy data to DB
 //seedDB();
 
